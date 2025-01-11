@@ -100,6 +100,16 @@ func upgrade(m: Machine):
 	m.upgraded = true
 	
 
+func tooltip_gen():
+	var res = "Operations:\n"
+	
+	for o in ops:
+		res += "- "
+		res += o.desc + "\n"
+	
+	res = res.left(res.length() - 1)
+	return res
+
 static func rng_tier1() -> Machine:
 	return Machine.construct(randi() % 4, Placer.Direction.Up)
 	
