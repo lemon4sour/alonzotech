@@ -201,6 +201,7 @@ pivot_offset = Vector2(110, 55)
 theme_override_styles/hover = SubResource("StyleBoxFlat_0lit6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pex5d")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4xime")
+disabled = true
 icon = ExtResource("4_qhhaf")
 icon_alignment = 1
 expand_icon = true
