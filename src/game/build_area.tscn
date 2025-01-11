@@ -1,11 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://dt5irqr6e8x0b"]
+[gd_scene load_steps=5 format=3 uid="uid://dt5irqr6e8x0b"]
 
-[ext_resource type="PackedScene" uid="uid://c46idvq2w8lo8" path="res://src/machines/adder.tscn" id="1_l8y5g"]
-[ext_resource type="PackedScene" uid="uid://br5nu1vaxmrwf" path="res://src/machines/deployer.tscn" id="1_yfv0i"]
+[ext_resource type="PackedScene" uid="uid://c46idvq2w8lo8" path="res://src/machines/machine.tscn" id="1_l8y5g"]
 [ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8ak8v"]
-scenes/2/scene = ExtResource("1_yfv0i")
 scenes/8/scene = ExtResource("1_l8y5g")
 
 [sub_resource type="TileSet" id="TileSet_3ut2s"]
@@ -15,7 +13,7 @@ sources/8 = SubResource("TileSetScenesCollectionSource_8ak8v")
 [node name="TileScene" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD/////CAAAAAAACAAAAP//CAAAAAAACAAAAAAACAAAAAAACAD//wAACAAAAAAACAAKAPn/CAAAAAAACAD+/wAACAAAAAAAAgD+////CAAAAAAAAgABAP//CAAAAAAAAgABAAAACAAAAAAAAgD9/wAACAAAAAAAAgD9////CAAAAAAAAgD///7/CAAAAAAAAgAAAP7/CAAAAAAAAgACAP//CAAAAAAAAgACAAAACAAAAAAAAgD//wEACAAAAAAAAgAAAAEACAAAAAAAAgA=")
+tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 255, 255, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 255, 255, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 10, 0, 249, 255, 8, 0, 0, 0, 0, 0, 8, 0)
 tile_set = SubResource("TileSet_3ut2s")
 
 [node name="Placer" type="Node2D" parent="."]

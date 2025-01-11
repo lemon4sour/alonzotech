@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://c46idvq2w8lo8"]
+
+[ext_resource type="Script" path="res://src/machines/adder.gd" id="1_2k4a7"]
+[ext_resource type="Texture2D" uid="uid://dpmi57585oe83" path="res://assets/machines/standard.png" id="1_ui5ga"]
+
+[sub_resource type="Animation" id="Animation_he2ta"]
+resource_name = "animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cn3b3"]
+_data = {
+"animation": SubResource("Animation_he2ta")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2k4a7")
+
+[node name="Adder" type="Sprite2D" parent="."]
+rotation = -6.28319
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Sprite2D" parent="Adder"]
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = -6.28319
+
+[node name="Hole" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Hole2" type="Sprite2D" parent="Node2D"]
+rotation = 3.14159
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cn3b3")
+}
