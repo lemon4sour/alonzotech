@@ -5,6 +5,8 @@ class_name Placer
 @export var tile_id: int = 8
 @export var active: bool = true
 
+var MachineQueue : Array[Machine] = []
+
 enum Direction {
 	Up,
 	Down,
@@ -22,6 +24,8 @@ var initial: Vector2i = Vector2i(0, 0)
 var place_index: Vector2i = Vector2i(32, 0)
 var direction: Direction = Direction.Right
 
+func _ready() -> void:
+	InventorySingleton.reset()
 
 func move():
 	match (direction):
@@ -36,7 +40,7 @@ func move():
 		_:
 			print("huh?")
 
-func _on_canvas_layer_button_press() -> void:
+func _on_canvas_layer_button_press(machine: Machine) -> void:
 	var machinescene = Machine.construct(1,direction)
 	add_child(machinescene)
 	machinescene.position = place_index
