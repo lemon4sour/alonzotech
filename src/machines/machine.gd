@@ -49,6 +49,18 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 				))
 			obj.axis = Axis.Left
 			obj.func_up = false
+		3:
+			obj.labelstr = "lambda"
+			obj.ops.push_back(Operator.new(
+			"+2",
+			func(a): 
+				if a == 0:
+					return 100
+				else:
+					return a
+				))
+			obj.axis = Axis.Left
+			obj.func_up = true
 		_:
 			printerr("Ne?", id)
 	
@@ -73,6 +85,9 @@ func _ready() -> void:
 			hole_parent.rotation = deg_to_rad(90)
 	
 	label.text = labelstr
+	
+	if func_up:
+		background.texture = preload("res://assets/machines/lambdal.png")
 
 func execute(a: int) -> int:
 	for op in ops:
@@ -86,7 +101,7 @@ func upgrade(m: Machine):
 	
 
 static func rng_tier1() -> Machine:
-	return Machine.construct(randi() % 3, Placer.Direction.Up)
+	return Machine.construct(randi() % 4, Placer.Direction.Up)
 	
 
 
