@@ -23,6 +23,11 @@ var direction: Direction = Direction.Right
 
 func _ready() -> void:
 	InventorySingleton.reset()
+	
+	var input = preload("res://src/machines/input_machine.tscn").instantiate()
+	add_child(input)
+	input.position = place_index
+	move()
 
 func move():
 	match (direction):
