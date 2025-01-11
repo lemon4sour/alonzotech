@@ -1,5 +1,13 @@
-[gd_scene format=3 uid="uid://s1y75jlu0mrm"]
+[gd_scene load_steps=3 format=3 uid="uid://s1y75jlu0mrm"]
+
+[ext_resource type="Texture2D" uid="uid://cqjcd48twg0jw" path="res://assets/machines/gold.png" id="1_lojal"]
+[ext_resource type="Texture2D" uid="uid://bxdbc8ek7kg0b" path="res://assets/machines/load.png" id="2_oknf2"]
 
 [node name="InputMachine" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lojal")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+rotation = 1.5708
+texture = ExtResource("2_oknf2")

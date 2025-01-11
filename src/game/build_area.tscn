@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt5irqr6e8x0b"]
+[gd_scene load_steps=4 format=3 uid="uid://dt5irqr6e8x0b"]
 
 [ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
+[ext_resource type="Script" path="res://src/game/tally.gd" id="2_go8xp"]
 [ext_resource type="PackedScene" uid="uid://d0mkxs4fd0qv4" path="res://src/game/canvas_layer.tscn" id="3_lfrqq"]
 
 [node name="TileScene" type="Node2D"]
 
 [node name="Placer" type="Node2D" parent="."]
 script = ExtResource("2_3dlyc")
+
+[node name="Tally" type="Node2D" parent="."]
+script = ExtResource("2_go8xp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-8, 1)

@@ -37,13 +37,24 @@ func move():
 		_:
 			printerr("huh?")
 
+func move_back():
+	match (direction):
+		Direction.Up:
+			place_index.y += 32
+		Direction.Down:
+			place_index.y -= 32
+		Direction.Left:
+			place_index.x += 32
+		Direction.Right:
+			place_index.x -= 32
+		_:
+			printerr("huh?")
+
 func on_machine_selected(index: int) -> void:
 	if !InventorySingleton.startable:
 		return
 	
 	var machinescene = InventorySingleton.machines.pop_at(index)
-	canvas_layer.update_buttons()
-	
 	machinescene.dir = direction
 	add_child(machinescene)
 	machinescene.position = place_index
@@ -74,3 +85,39 @@ func on_machine_selected(index: int) -> void:
 	MachineQueue.push_back(machinescene)
 	move()
 	InventorySingleton.startable = !map.has(place_index)
+	InventorySingleton.revertable = true
+	canvas_layer.update_buttons()
+	
+
+func on_revert_selected() -> void:
+	var machine = MachineQueue.pop_back()
+	InventorySingleton.machines.push_back(machine)
+	remove_child(machine)
+	move_back()
+	map.erase(place_index)
+	
+	match (machine.axis):
+		Machine.Axis.Left:
+			match (direction):
+				Direction.Up:
+					direction = Direction.Right
+				Direction.Left:
+					direction = Direction.Up
+				Direction.Down:
+					direction = Direction.Left
+				Direction.Right:
+					direction = Direction.Down
+		Machine.Axis.Right:
+			match (direction):
+				Direction.Up:
+					direction = Direction.Left
+				Direction.Left:
+					direction = Direction.Down
+				Direction.Down:
+					direction = Direction.Right
+				Direction.Right:
+					direction = Direction.Up
+	
+	InventorySingleton.startable = true
+	InventorySingleton.revertable = !MachineQueue.is_empty()
+	canvas_layer.update_buttons()
