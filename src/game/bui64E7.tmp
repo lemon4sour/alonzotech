@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt5irqr6e8x0b"]
+[gd_scene load_steps=5 format=3 uid="uid://dt5irqr6e8x0b"]
 
 [ext_resource type="PackedScene" uid="uid://c46idvq2w8lo8" path="res://src/machines/machine.tscn" id="1_l8y5g"]
 [ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
-[ext_resource type="PackedScene" uid="uid://d0mkxs4fd0qv4" path="res://src/game/canvas_layer.tscn" id="3_lfrqq"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8ak8v"]
 scenes/8/scene = ExtResource("1_l8y5g")
@@ -23,5 +22,3 @@ script = ExtResource("2_3dlyc")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-8, 1)
 zoom = Vector2(2, 2)
-
-[node name="CanvasLayer" parent="." instance=ExtResource("3_lfrqq")]
