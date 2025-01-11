@@ -7,6 +7,8 @@
 
 [node name="Placer" type="Node2D" parent="."]
 script = ExtResource("2_3dlyc")
+tile_id = null
+active = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-8, 1)
