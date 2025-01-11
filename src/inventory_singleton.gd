@@ -6,7 +6,7 @@ var revertable: bool = false
 
 func reset():
 	machines.clear()
-	for i in 100:
+	for i in 3:
 		machines.push_back(Machine.rng_tier1())
 	
 	
