@@ -38,7 +38,7 @@ func move():
 			printerr("huh?")
 
 func on_machine_selected(index: int) -> void:
-	if !startable:
+	if !InventorySingleton.startable:
 		return
 	
 	var machinescene = InventorySingleton.machines.pop_at(index)
@@ -73,4 +73,4 @@ func on_machine_selected(index: int) -> void:
 	
 	MachineQueue.push_back(machinescene)
 	move()
-	startable = !map.has(place_index)
+	InventorySingleton.startable = !map.has(place_index)
