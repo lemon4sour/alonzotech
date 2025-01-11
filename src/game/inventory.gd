@@ -2,6 +2,7 @@ extends HBoxContainer
 
 @onready var item: Button = $"../../../Item"
 signal machine_selected
+signal send_machine
 
 func _ready() -> void:
 	clear_buttons()
@@ -14,10 +15,17 @@ func list_buttons() -> void:
 		var button : Button = item.duplicate()
 		button.visible = true
 		add_child(button)
-		var machine_clone : Machine = machine.duplicate()
-		machine_clone.position += Vector2(40,40)
-		button.add_child(machine_clone)
-		button.pressed.connect(_on_button_pressed.bind(i))
+		button.text = machine.labelstr
+		button.left_click.connect(_on_button_pressed.bind(i))
+		button.right_click.connect(_on_stash.bind(i))
+		button.tooltip_text = machine.tooltip_gen()
+		
+		if machine.func_up:
+			button.modulate = Color.WEB_PURPLE
+		
+		if machine.upgraded:
+			button.modulate = Color.CRIMSON
+		
 		i += 1
 		
 func clear_buttons() -> void:
@@ -25,6 +33,8 @@ func clear_buttons() -> void:
 		remove_child(child)
 		child.queue_free()
 		
+func _on_stash(index: int) -> void:
+	emit_signal("send_machine", index)
 	
 func _on_button_pressed(index: int) -> void:
 	emit_signal("machine_selected", index)

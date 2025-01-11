@@ -20,7 +20,10 @@ zoom = Vector2(2, 2)
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lfrqq")]
 
 [node name="ShopUI" parent="." instance=ExtResource("4_on15m")]
+visible = false
 
 [connection signal="machine_selected" from="CanvasLayer" to="Placer" method="on_machine_selected"]
+[connection signal="remove_machine" from="CanvasLayer" to="Tally" method="on_machine_extract"]
 [connection signal="revert" from="CanvasLayer" to="Placer" method="on_revert_selected"]
 [connection signal="run" from="CanvasLayer" to="Tally" method="on_start_selected"]
+[connection signal="send_machine" from="CanvasLayer" to="Tally" method="on_machine_insert"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb5y33hc3d0o2"]
+
+[ext_resource type="Script" path="res://src/game/extbutton.gd" id="1_e31b0"]
+
+[node name="Item" type="Button"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+offset_left = 378.0
+offset_top = 772.0
+offset_right = 506.0
+offset_bottom = 900.0
+script = ExtResource("1_e31b0")

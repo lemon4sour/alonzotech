@@ -10,6 +10,8 @@ var MachineQueue : Array[Machine] = []
 var map: Dictionary = {}
 var startable: bool = true
 
+@export var input_machine: Node2D
+
 enum Direction {
 	Up,
 	Down,
@@ -18,15 +20,15 @@ enum Direction {
 }
 
 var initial: Vector2i = Vector2i(0, 0)
-var place_index: Vector2i = Vector2i(32, 0)
+@export var place_index: Vector2i = Vector2i(32, 0)
 var direction: Direction = Direction.Right
 
 func _ready() -> void:
 	InventorySingleton.reset()
 	
-	var input = preload("res://src/machines/input_machine.tscn").instantiate()
-	add_child(input)
-	input.position = place_index
+	input_machine = preload("res://src/machines/input_machine.tscn").instantiate()
+	add_child(input_machine)
+	input_machine.position = place_index
 	map.get_or_add(place_index)
 	move()
 

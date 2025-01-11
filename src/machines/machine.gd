@@ -14,6 +14,10 @@ const self_scene = preload("res://src/machines/machine.tscn")
 @onready var label: Label = $Background/Label
 @onready var hole: Sprite2D = $HoleParent/Hole
 @onready var hole_parent: Node2D = $HoleParent
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var tooltip_panel: Panel = $TooltipPanel
+
+signal animation_finished
 
 
 static func construct(id: int, dir: Placer.Direction) -> Machine:
@@ -38,27 +42,24 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.axis = Axis.Right
 			obj.func_up = false
 		2:
-			obj.labelstr = "0->100"
+			obj.labelstr = "0->32"
 			obj.ops.push_back(Operator.new(
-			"if (a == 0) {100} else {a}",
+			"a == 0 ? 32 : a",
 			func(a): 
 				if a == 0:
-					return 100
+					return 32
 				else:
 					return a
 				))
 			obj.axis = Axis.Left
 			obj.func_up = false
 		3:
-			obj.labelstr = "lambda"
+			obj.labelstr = "λ+2"
 			obj.ops.push_back(Operator.new(
-			"+2",
+			"f(x) + 2",
 			func(a): 
-				if a == 0:
-					return 100
-				else:
-					return a
-				))
+				return a
+			))
 			obj.axis = Axis.Left
 			obj.func_up = true
 		_:
@@ -68,6 +69,8 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	update_tooltip()
+	
 	match (axis):
 		Axis.Left:
 			hole.rotation = deg_to_rad(-90)
@@ -99,7 +102,10 @@ func execute(a: int) -> int:
 func upgrade(m: Machine):
 	m.ops.append_array(ops)
 	m.upgraded = true
+	update_tooltip()
 	
+func update_tooltip():
+	tooltip_panel.tooltip_text = tooltip_gen()
 
 func tooltip_gen():
 	var res = "Operations:\n"
@@ -115,6 +121,10 @@ static func rng_tier1() -> Machine:
 	return Machine.construct(randi() % 4, Placer.Direction.Up)
 	
 
+func bounce():
+	animation_player.play("wobble_bounce")
+	await(animation_player.animation_finished)
+	emit_signal("animation_finished")
 
 enum Axis {
 	Line,
