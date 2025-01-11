@@ -4,6 +4,7 @@ class_name Machine
 var sprite: Sprite2D
 var ops: Array[Operator] = []
 var axis: Axis
+var dir: Placer.Direction
 var func_up: bool
 var upgraded: bool = false
 
@@ -17,6 +18,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 
 static func construct(id: int, dir: Placer.Direction) -> Machine:
 	var obj = self_scene.instantiate()
+	obj.dir = dir
 	
 	match(id):
 		0:
@@ -47,16 +49,6 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 		_:
 			printerr("Ne?", id)
 	
-	match(dir):
-		Placer.Direction.Up:
-			obj.hole_parent.rotation = deg_to_rad(0)
-		Placer.Direction.Down:
-			obj.hole_parent.rotation = deg_to_rad(180)
-		Placer.Direction.Left:
-			obj.hole_parent.rotation = deg_to_rad(-90)
-		Placer.Direction.Right:
-			obj.hole_parent.rotation = deg_to_rad(90)
-	
 	return obj
 
 # Called when the node enters the scene tree for the first time.
@@ -67,6 +59,15 @@ func _ready() -> void:
 		Axis.Right:
 			hole.rotation = deg_to_rad(90)
 	
+	match(dir):
+		Placer.Direction.Up:
+			hole_parent.rotation = deg_to_rad(0)
+		Placer.Direction.Down:
+			hole_parent.rotation = deg_to_rad(180)
+		Placer.Direction.Left:
+			hole_parent.rotation = deg_to_rad(-90)
+		Placer.Direction.Right:
+			hole_parent.rotation = deg_to_rad(90)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
