@@ -6,6 +6,8 @@ class_name Placer
 @export var active: bool = true
 
 var MachineQueue : Array[Machine] = []
+var map: Dictionary = {}
+var startable: bool = true
 
 enum Direction {
 	Up,
@@ -24,7 +26,7 @@ func _ready() -> void:
 var xy := 0.0
 func _physics_process(delta: float) -> void:
 	xy += delta
-	if xy > 2.0:
+	if xy > 1.0:
 		xy = 0.0
 		_on_canvas_layer_button_press(randi() % 5)
 
@@ -39,13 +41,17 @@ func move():
 		Direction.Right:
 			place_index.x += 32
 		_:
-			print("huh?")
+			printerr("huh?")
 
 func _on_canvas_layer_button_press(index: int) -> void:
+	if !startable:
+		return
+	
 	var machinescene = InventorySingleton.machines.pop_front()
 	machinescene.dir = direction
 	add_child(machinescene)
 	machinescene.position = place_index
+	map.get_or_add(place_index)
 	
 	match (machinescene.axis):
 		Machine.Axis.Left:
@@ -71,3 +77,4 @@ func _on_canvas_layer_button_press(index: int) -> void:
 	
 	MachineQueue.push_back(machinescene)
 	move()
+	startable = !map.has(place_index)
