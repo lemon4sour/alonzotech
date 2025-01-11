@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://d0mkxs4fd0qv4"]
+[gd_scene load_steps=2 format=3 uid="uid://d0mkxs4fd0qv4"]
+
+[ext_resource type="Script" path="res://src/game/canvas_layer.gd" id="1_tq8v7"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_tq8v7")
 
 [node name="Inventory" type="Control" parent="."]
 layout_mode = 3
@@ -30,11 +33,6 @@ size_flags_vertical = 3
 [node name="Item" type="Button" parent="Inventory/Scroll/HBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-
-[node name="Backdrop" type="Panel" parent="Inventory/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Stats" type="Panel" parent="."]
 anchors_preset = 2
@@ -80,29 +78,4 @@ layout_mode = 2
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Border" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel1" type="Panel" parent="Border"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_top = 704.0
-offset_right = 1400.0
-offset_bottom = 900.0
-grow_horizontal = 0
-
-[node name="Panel2" type="Panel" parent="Border"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_right = 248.0
-offset_bottom = 704.0
-grow_horizontal = 0
+[connection signal="pressed" from="Inventory/Scroll/HBoxContainer/Item" to="." method="_on_item_pressed"]
