@@ -30,10 +30,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Item" type="Button" parent="Inventory/Scroll/HBoxContainer"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-
 [node name="Stats" type="Panel" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
@@ -41,6 +37,30 @@ anchor_bottom = 1.0
 offset_top = -172.0
 offset_right = 256.0
 grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = -17.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 93.0
+offset_right = -17.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Run" type="Panel" parent="."]
 anchors_preset = 3
@@ -78,4 +98,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[connection signal="pressed" from="Inventory/Scroll/HBoxContainer/Item" to="." method="_on_item_pressed"]
+[node name="Item" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+offset_left = 378.0
+offset_top = 772.0
+offset_right = 506.0
+offset_bottom = 900.0
+
+[connection signal="pressed" from="Item" to="." method="_on_item_pressed"]
