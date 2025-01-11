@@ -6,7 +6,6 @@ var ops: Array[Operator] = []
 var axis: Axis
 var func_up: bool
 var upgraded: bool = false
-var rotat: float = 0
 
 const self_scene = preload("res://src/machines/machine.tscn")
 
@@ -16,7 +15,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 @onready var hole_parent: Node2D = $HoleParent
 
 
-static func construct(id: int) -> Machine:
+static func construct(id: int, dir: Placer.Direction) -> Machine:
 	var obj = self_scene.instantiate()
 	
 	match(id):
@@ -48,6 +47,16 @@ static func construct(id: int) -> Machine:
 		_:
 			printerr("Ne?", id)
 	
+	match(dir):
+		Placer.Direction.Up:
+			obj.rotation = deg_to_rad(0)
+		Placer.Direction.Down:
+			obj.rotation = deg_to_rad(180)
+		Placer.Direction.Left:
+			obj.rotation = deg_to_rad(-90)
+		Placer.Direction.Right:
+			obj.rotation = deg_to_rad(90)
+	
 	return obj
 
 # Called when the node enters the scene tree for the first time.
@@ -58,12 +67,11 @@ func _ready() -> void:
 		Axis.Right:
 			hole.rotation = deg_to_rad(90)
 	
-	rotation = deg_to_rad(rotat)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	hole_parent.rotation = deg_to_rad(rotat)
+	pass
 
 func execute(a: int) -> int:
 	for op in ops:
@@ -77,7 +85,7 @@ func upgrade(m: Machine):
 	
 
 static func rng_tier1() -> Machine:
-	return Machine.construct(randi() % 3)
+	return Machine.construct(randi() % 3, Placer.Direction.Up)
 	
 
 
