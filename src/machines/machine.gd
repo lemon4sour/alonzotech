@@ -2,7 +2,7 @@ extends Node2D
 class_name Machine
 
 var sprite: Sprite2D
-var ops: Array = []
+var ops: Array[Operator] = []
 var axis: Axis
 var func_up: bool
 var upgraded: bool = false
@@ -22,6 +22,8 @@ func _ready() -> void:
 			hole.rotation = deg_to_rad(-90)
 		Axis.Right:
 			hole.rotation = deg_to_rad(90)
+	
+	rotation = deg_to_rad(rotat)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,6 +35,11 @@ func execute(a: int) -> int:
 		a = op.op.call(a)
 	
 	return a
+
+func upgrade(m: Machine):
+	m.ops.append_array(ops)
+	m.upgraded = true
+	
 
 static func rng_tier1() -> Machine:
 	return Machine.new(randi() % 3)
