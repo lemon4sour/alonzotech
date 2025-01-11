@@ -27,6 +27,7 @@ func _ready() -> void:
 	var input = preload("res://src/machines/input_machine.tscn").instantiate()
 	add_child(input)
 	input.position = place_index
+	map.get_or_add(place_index)
 	move()
 
 func move():
