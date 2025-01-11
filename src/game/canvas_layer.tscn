@@ -1,7 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0mkxs4fd0qv4"]
+[gd_scene load_steps=10 format=3 uid="uid://d0mkxs4fd0qv4"]
 
 [ext_resource type="Script" path="res://src/game/canvas_layer.gd" id="1_tq8v7"]
 [ext_resource type="Script" path="res://src/game/inventory.gd" id="2_nhsal"]
+[ext_resource type="Texture2D" uid="uid://y5co6k2wcbtt" path="res://assets/ui/two-coins.svg" id="3_osym3"]
+[ext_resource type="Texture2D" uid="uid://bm2hd7buvtals" path="res://assets/ui/play-button.svg" id="4_qhhaf"]
+
+[sub_resource type="FontFile" id="FontFile_7nolc"]
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0alx"]
+font = SubResource("FontFile_7nolc")
+font_size = 50
+font_color = Color(1, 0.713726, 0.254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf8ix"]
+bg_color = Color(0.247406, 0.831738, 0.478495, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4yvt"]
+bg_color = Color(0.16038, 0.526292, 0.300575, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iglr6"]
+bg_color = Color(0.228475, 0.754199, 0.434323, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_tq8v7")
@@ -52,6 +95,35 @@ offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Label" type="Label" parent="Stats/Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -133.0
+offset_top = -1.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "5"
+label_settings = SubResource("LabelSettings_t0alx")
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Stats/Panel"]
+modulate = Color(1, 0.713726, 0.254902, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -31.0
+offset_right = 65.0
+offset_bottom = 31.0
+grow_vertical = 2
+texture = ExtResource("3_osym3")
+expand_mode = 1
+
 [node name="Panel2" type="Panel" parent="Stats"]
 layout_mode = 1
 anchors_preset = 15
@@ -74,6 +146,24 @@ offset_left = -256.0
 offset_top = -172.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Button" type="Button" parent="Run"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 30.0
+offset_right = -15.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_wf8ix")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n4yvt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iglr6")
+icon = ExtResource("4_qhhaf")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Score" type="Panel" parent="."]
 offset_right = 256.0
