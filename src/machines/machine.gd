@@ -74,6 +74,12 @@ func _ready() -> void:
 		Axis.Right:
 			hole.rotation = deg_to_rad(90)
 	
+	label.text = labelstr
+	
+	if func_up:
+		background.texture = preload("res://assets/machines/lambdal.png")
+
+func _process(delta: float) -> void:
 	match(dir):
 		Placer.Direction.Up:
 			hole_parent.rotation = deg_to_rad(0)
@@ -83,11 +89,6 @@ func _ready() -> void:
 			hole_parent.rotation = deg_to_rad(-90)
 		Placer.Direction.Right:
 			hole_parent.rotation = deg_to_rad(90)
-	
-	label.text = labelstr
-	
-	if func_up:
-		background.texture = preload("res://assets/machines/lambdal.png")
 
 func execute(a: int) -> int:
 	for op in ops:
