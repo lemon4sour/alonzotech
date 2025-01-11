@@ -1,18 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c46idvq2w8lo8"]
 
 [ext_resource type="Script" path="res://src/machines/machine.gd" id="1_tkk3n"]
-[ext_resource type="Texture2D" uid="uid://dpmi57585oe83" path="res://assets/machines/standard.png" id="1_ui5ga"]
-
-[sub_resource type="GDScript" id="GDScript_37x2p"]
-script/source = "extends Node2D
-
-
-func produce(input: float):
-	return input + 2
-	
-func animate():
-	pass	
-"
+[ext_resource type="Texture2D" uid="uid://d11qdi8g8vtnx" path="res://assets/machines/standard.png" id="1_ui5ga"]
 
 [sub_resource type="Animation" id="Animation_he2ta"]
 resource_name = "animation"
