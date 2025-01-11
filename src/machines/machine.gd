@@ -59,9 +59,9 @@ func _init(id: int):
 			"if (a == 0) {100} else {a}",
 			func(a): 
 				if a == 0:
-					100
+					return 100
 				else:
-					a
+					return a
 				))
 			axis = Axis.Left
 			func_up = false
