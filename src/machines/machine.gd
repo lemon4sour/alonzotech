@@ -69,19 +69,6 @@ func _ready() -> void:
 		Placer.Direction.Right:
 			hole_parent.rotation = deg_to_rad(90)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	match(dir):
-		Placer.Direction.Up:
-			hole_parent.rotation = deg_to_rad(0)
-		Placer.Direction.Down:
-			hole_parent.rotation = deg_to_rad(180)
-		Placer.Direction.Left:
-			hole_parent.rotation = deg_to_rad(-90)
-		Placer.Direction.Right:
-			hole_parent.rotation = deg_to_rad(90)
-
 func execute(a: int) -> int:
 	for op in ops:
 		a = op.op.call(a)

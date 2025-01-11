@@ -125,4 +125,4 @@ text = "+2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Item" to="." method="_on_item_pressed"]
+[connection signal="machine_selected" from="Inventory/Scroll/HBoxContainer" to="." method="on_machine_selected"]

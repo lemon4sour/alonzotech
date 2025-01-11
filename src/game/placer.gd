@@ -1,6 +1,7 @@
 extends Node2D
 
 class_name Placer
+@onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
 
 @export var tile_id: int = 8
 @export var active: bool = true
@@ -23,13 +24,6 @@ var direction: Direction = Direction.Right
 func _ready() -> void:
 	InventorySingleton.reset()
 
-var xy := 0.0
-func _physics_process(delta: float) -> void:
-	xy += delta
-	if xy > 1.0:
-		xy = 0.0
-		_on_canvas_layer_button_press(randi() % 5)
-
 func move():
 	match (direction):
 		Direction.Up:
@@ -43,11 +37,13 @@ func move():
 		_:
 			printerr("huh?")
 
-func _on_canvas_layer_button_press(index: int) -> void:
+func on_machine_selected(index: int) -> void:
 	if !startable:
 		return
 	
-	var machinescene = InventorySingleton.machines.pop_front()
+	var machinescene = InventorySingleton.machines.pop_at(index)
+	canvas_layer.update_buttons()
+	
 	machinescene.dir = direction
 	add_child(machinescene)
 	machinescene.position = place_index

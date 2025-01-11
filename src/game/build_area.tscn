@@ -13,3 +13,5 @@ position = Vector2(-8, 1)
 zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lfrqq")]
+
+[connection signal="machine_selected" from="CanvasLayer" to="Placer" method="on_machine_selected"]

@@ -1,10 +1,14 @@
 extends HBoxContainer
 
 @onready var item: Button = $"../../../Item"
+signal machine_selected
 
 func _ready() -> void:
 	clear_buttons()
+	list_buttons()
 	
+		
+func list_buttons() -> void:
 	var i = 0
 	for machine in InventorySingleton.machines:
 		var button : Button = item.duplicate()
@@ -20,4 +24,4 @@ func clear_buttons() -> void:
 		
 	
 func _on_button_pressed(index: int) -> void:
-	emit_signal("machine_selected", 1)
+	emit_signal("machine_selected", index)
