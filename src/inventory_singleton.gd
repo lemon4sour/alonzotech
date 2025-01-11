@@ -2,6 +2,7 @@ extends Node
 
 var machines: Array[Machine]
 var startable: bool = true
+var revertable: bool = false
 
 func reset():
 	machines.clear()
@@ -10,3 +11,4 @@ func reset():
 	
 	
 	startable = true
+	revertable = false
