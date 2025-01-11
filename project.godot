@@ -11,5 +11,19 @@ config_version=5
 [application]
 
 config/name="AlonzoTech"
+run/main_scene="res://src/game/build_area.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalCanvasLayer="*res://src/game/canvas_layer.tscn"
+
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=900
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

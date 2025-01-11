@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c46idvq2w8lo8"]
+
+[ext_resource type="Texture2D" uid="uid://dpmi57585oe83" path="res://assets/machines/standard.png" id="1_ui5ga"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Adder" type="Sprite2D" parent="."]
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Sprite2D" parent="Adder"]
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Hole" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Hole2" type="Sprite2D" parent="Node2D"]
+rotation = 3.14159
+texture = ExtResource("1_ui5ga")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
