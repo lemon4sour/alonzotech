@@ -8,4 +8,5 @@ func reset():
 	for i in 100:
 		machines.push_back(Machine.rng_tier1())
 	
+	
 	startable = true
