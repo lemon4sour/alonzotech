@@ -1,7 +1,7 @@
 extends Node2D
 class_name Machine
 
-var sprite: Sprite2D
+var labelstr: String
 var ops: Array[Operator] = []
 var axis: Axis
 var dir: Placer.Direction
@@ -11,7 +11,7 @@ var upgraded: bool = false
 const self_scene = preload("res://src/machines/machine.tscn")
 
 @onready var background: Sprite2D = $Background
-@onready var label: Sprite2D = $Background/Label
+@onready var label: Label = $Background/Label
 @onready var hole: Sprite2D = $HoleParent/Hole
 @onready var hole_parent: Node2D = $HoleParent
 
@@ -22,6 +22,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 	
 	match(id):
 		0:
+			obj.labelstr = "+2"
 			obj.ops.push_back(Operator.new("a + 2",
 				func(a): 
 				return a + 2
@@ -29,6 +30,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.axis = Axis.Line
 			obj.func_up = false
 		1:
+			obj.labelstr = "x2"
 			obj.ops.push_back(Operator.new("a x 2",
 				func(a): 
 				return a * 2
@@ -36,6 +38,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.axis = Axis.Right
 			obj.func_up = false
 		2:
+			obj.labelstr = "0->100"
 			obj.ops.push_back(Operator.new(
 			"if (a == 0) {100} else {a}",
 			func(a): 
@@ -68,6 +71,8 @@ func _ready() -> void:
 			hole_parent.rotation = deg_to_rad(-90)
 		Placer.Direction.Right:
 			hole_parent.rotation = deg_to_rad(90)
+	
+	label.text = labelstr
 
 func execute(a: int) -> int:
 	for op in ops:

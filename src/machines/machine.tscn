@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c46idvq2w8lo8"]
+[gd_scene load_steps=7 format=3 uid="uid://c46idvq2w8lo8"]
 
 [ext_resource type="Script" path="res://src/machines/machine.gd" id="1_tkk3n"]
 [ext_resource type="Texture2D" uid="uid://d11qdi8g8vtnx" path="res://assets/machines/standard.png" id="1_ui5ga"]
+[ext_resource type="FontFile" uid="uid://bq7egmcfnr18e" path="res://assets/AtlantisInternational-jen0.ttf" id="3_55pgs"]
 [ext_resource type="Texture2D" uid="uid://dxtnissfok33m" path="res://assets/machines/hole.png" id="3_p6rn0"]
 
 [sub_resource type="Animation" id="Animation_he2ta"]
@@ -44,9 +45,25 @@ rotation = -6.28319
 texture = ExtResource("1_ui5ga")
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Label" type="Sprite2D" parent="Background"]
-region_enabled = true
-region_rect = Rect2(64, 0, 32, 32)
+[node name="Label" type="Label" parent="Background"]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -25.0001
+offset_right = 6.00004
+offset_bottom = -2.00008
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_55pgs")
+theme_override_font_sizes/font_size = 16
+text = "0->100"
+horizontal_alignment = 1
 
 [node name="HoleParent" type="Node2D" parent="."]
 rotation = -6.28319
