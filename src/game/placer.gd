@@ -1,24 +1,35 @@
 extends Node2D
 
-@onready var Border: Control = %Border
-@onready var tilemap: TileMapLayer = $"../TileMapLayer"
 @export var tile_id: int = 8
 @export var active: bool = true
 
+enum Direction {
+	Up,
+	Down,
+	Left,
+	Right
+}
+
 var initial: Vector2i = Vector2i(0, 0)
+var place_index: Vector2i = Vector2i(0,0)
+var direction: Direction = Direction.Right
 
-func place():
-	var mouse_pos = get_global_mouse_position()
-	var local_pos = tilemap.to_local(mouse_pos)
-	var tile_pos = tilemap.local_to_map(local_pos)
-	print(tile_pos)
-
-func _input(event):
-	if not active:
-		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		place()
+func move():
+	match (direction):
+		Direction.Up:
+			place_index.y -= 32
+		Direction.Down:
+			place_index.y += 32
+		Direction.Left:
+			place_index.x -= 32
+		Direction.Right:
+			place_index.x += 32
+		_:
+			print("huh?")
 
 func _on_canvas_layer_button_press() -> void:
-	tilemap.set_cell(initial,8,Vector2i(0,0),8)
-	initial.x += 1
+	var machinescene = preload("res://src/machines/machine.tscn").instantiate()
+	add_child(machinescene)
+	machinescene.position = place_index
+	var new_machine : Machine = Machine.new(0)
+	move()
