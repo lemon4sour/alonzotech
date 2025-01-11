@@ -49,13 +49,13 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 	
 	match(dir):
 		Placer.Direction.Up:
-			obj.rotation = deg_to_rad(0)
+			obj.hole_parent.rotation = deg_to_rad(0)
 		Placer.Direction.Down:
-			obj.rotation = deg_to_rad(180)
+			obj.hole_parent.rotation = deg_to_rad(180)
 		Placer.Direction.Left:
-			obj.rotation = deg_to_rad(-90)
+			obj.hole_parent.rotation = deg_to_rad(-90)
 		Placer.Direction.Right:
-			obj.rotation = deg_to_rad(90)
+			obj.hole_parent.rotation = deg_to_rad(90)
 	
 	return obj
 
