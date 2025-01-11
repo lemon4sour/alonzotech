@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://wotdpqdlg1lw"]
+
+[ext_resource type="PackedScene" uid="uid://c46idvq2w8lo8" path="res://src/machines/machine.tscn" id="1_qeisv"]
+
+[node name="Brogolemtest" type="Node2D"]
+
+[node name="Machine" parent="." instance=ExtResource("1_qeisv")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

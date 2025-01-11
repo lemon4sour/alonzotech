@@ -1,17 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c46idvq2w8lo8"]
 
-[ext_resource type="Texture2D" uid="uid://dpmi57585oe83" path="res://assets/machines/standard.png" id="1_ui5ga"]
-
-[sub_resource type="GDScript" id="GDScript_37x2p"]
-script/source = "extends Node2D
-
-
-func produce(input: float):
-	return input + 2
-	
-func animate():
-	pass	
-"
+[ext_resource type="Script" path="res://src/machines/machine.gd" id="1_tkk3n"]
+[ext_resource type="Texture2D" uid="uid://d11qdi8g8vtnx" path="res://assets/machines/standard.png" id="1_ui5ga"]
 
 [sub_resource type="Animation" id="Animation_he2ta"]
 resource_name = "animation"
@@ -45,29 +35,29 @@ _data = {
 "animation": SubResource("Animation_he2ta")
 }
 
-[node name="Node2D" type="Node2D"]
-script = SubResource("GDScript_37x2p")
+[node name="Machine" type="Node2D"]
+script = ExtResource("1_tkk3n")
 
-[node name="Adder" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 rotation = -6.28319
 texture = ExtResource("1_ui5ga")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Label" type="Sprite2D" parent="Adder"]
+[node name="Label" type="Sprite2D" parent="Background"]
 texture = ExtResource("1_ui5ga")
 region_enabled = true
 region_rect = Rect2(64, 0, 32, 32)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="HoleParent" type="Node2D" parent="."]
 rotation = -6.28319
 
-[node name="Hole" type="Sprite2D" parent="Node2D"]
+[node name="Hole" type="Sprite2D" parent="HoleParent"]
 texture = ExtResource("1_ui5ga")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 32)
 
-[node name="Hole2" type="Sprite2D" parent="Node2D"]
+[node name="Hole2" type="Sprite2D" parent="HoleParent"]
 rotation = 3.14159
 texture = ExtResource("1_ui5ga")
 region_enabled = true
