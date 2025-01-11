@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt5irqr6e8x0b"]
+[gd_scene load_steps=5 format=3 uid="uid://dt5irqr6e8x0b"]
 
 [ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
 [ext_resource type="Script" path="res://src/game/tally.gd" id="2_go8xp"]
 [ext_resource type="PackedScene" uid="uid://d0mkxs4fd0qv4" path="res://src/game/canvas_layer.tscn" id="3_lfrqq"]
+[ext_resource type="PackedScene" uid="uid://cmkjpxemr011h" path="res://src/game/shop_ui.tscn" id="4_on15m"]
 
 [node name="TileScene" type="Node2D"]
 
@@ -17,6 +18,8 @@ position = Vector2(-8, 1)
 zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lfrqq")]
+
+[node name="ShopUI" parent="." instance=ExtResource("4_on15m")]
 
 [connection signal="machine_selected" from="CanvasLayer" to="Placer" method="on_machine_selected"]
 [connection signal="revert" from="CanvasLayer" to="Placer" method="on_revert_selected"]

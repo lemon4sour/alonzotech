@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cmkjpxemr011h"]
+
+[node name="ShopUI" type="CanvasLayer"]
+
+[node name="Score" type="Panel" parent="."]
+offset_left = 511.0
+offset_top = 87.0
+offset_right = 1343.0
+offset_bottom = 626.0
