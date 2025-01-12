@@ -83,8 +83,8 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.ops.push_back(Operator.new(
 			"a - 1 (+ 1 coin)",
 			func(a): 
+				InventorySingleton.add_money(1)
 				return a - 1
-				InventorySingleton.coins += 1
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false

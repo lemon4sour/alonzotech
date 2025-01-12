@@ -31,6 +31,8 @@ signal insert_finished
 
 func _ready() -> void:
 	slotlist = [slot_1, slot_2, slot_3]
+	
+	InventorySingleton.money_changed.connect(set_coins)
 
 func update_buttons():
 	h_box_container.clear_buttons()
@@ -42,6 +44,8 @@ func update_list(current_round, machine_buffer: Array[Machine]):
 	var i = 0
 	for machine in machine_buffer:
 		slotlist[i].text = machine.labelstr
+		if slotlist[i].pressed.is_connected(on_click):
+			slotlist[i].pressed.disconnect(on_click)
 		slotlist[i].pressed.connect(on_click.bind(i))
 		i += 1
 	

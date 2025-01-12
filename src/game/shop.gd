@@ -24,6 +24,8 @@ func display() -> void:
 	for button: Button in buttonlist:
 		var machine = Machine.construct(randi() % 10, Placer.Direction.Up)
 		button.text = machine.labelstr
+		if button.pressed.is_connected(on_buy):
+			button.pressed.disconnect(on_buy)
 		button.pressed.connect(on_buy.bind(machine, button))
 		button.tooltip_text = machine.tooltip_gen()
 		
