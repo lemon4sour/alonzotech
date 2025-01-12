@@ -1,11 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://dt5irqr6e8x0b"]
+[gd_scene load_steps=17 format=3 uid="uid://dt5irqr6e8x0b"]
 
 [ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
 [ext_resource type="Script" path="res://src/game/tally.gd" id="2_go8xp"]
+[ext_resource type="AudioStream" uid="uid://cejn8p67gkawd" path="res://assets/audio/revert.wav" id="2_gs3ec"]
+[ext_resource type="AudioStream" uid="uid://b82y0eoh3k8a6" path="res://assets/audio/place.wav" id="3_066jh"]
 [ext_resource type="PackedScene" uid="uid://d0mkxs4fd0qv4" path="res://src/game/canvas_layer.tscn" id="3_lfrqq"]
 [ext_resource type="PackedScene" uid="uid://cmkjpxemr011h" path="res://src/game/shop_ui.tscn" id="4_on15m"]
+[ext_resource type="AudioStream" uid="uid://sho31vmb3klo" path="res://assets/audio/place2.wav" id="4_pnvdn"]
 [ext_resource type="Script" path="res://src/game/main.gd" id="5_kg12f"]
+[ext_resource type="AudioStream" uid="uid://wx3egcskv3fd" path="res://assets/audio/place3.wav" id="5_w8i0v"]
 [ext_resource type="Texture2D" uid="uid://bm2hd7buvtals" path="res://assets/ui/play-button.svg" id="6_n7ugy"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yko7b"]
+streams_count = 1
+stream_0/stream = ExtResource("2_gs3ec")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_udlud"]
+streams_count = 3
+stream_0/stream = ExtResource("3_066jh")
+stream_1/stream = ExtResource("4_pnvdn")
+stream_2/stream = ExtResource("5_w8i0v")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyrfv"]
 bg_color = Color(0.247406, 0.831738, 0.478495, 1)
@@ -24,6 +38,12 @@ font_color = Color(1, 0.713726, 0.254902, 1)
 
 [node name="Placer" type="Node2D" parent="."]
 script = ExtResource("2_3dlyc")
+
+[node name="RevertAudio" type="AudioStreamPlayer" parent="Placer"]
+stream = SubResource("AudioStreamRandomizer_yko7b")
+
+[node name="PlaceAudio" type="AudioStreamPlayer" parent="Placer"]
+stream = SubResource("AudioStreamRandomizer_udlud")
 
 [node name="Tally" type="Node2D" parent="."]
 script = ExtResource("2_go8xp")
