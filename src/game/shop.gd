@@ -39,6 +39,8 @@ func display() -> void:
 	visible = true
 	
 func on_buy(machine: Machine, button: Button) -> void:
+	if InventorySingleton.coins < machine.cost :
+		return
 	button.disabled = true
 	InventorySingleton.coins -= machine.cost
 	canvas_layer.set_coins(InventorySingleton.coins)
