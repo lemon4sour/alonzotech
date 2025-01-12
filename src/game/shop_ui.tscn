@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmkjpxemr011h"]
+[gd_scene load_steps=10 format=3 uid="uid://cmkjpxemr011h"]
 
 [ext_resource type="Script" path="res://src/game/shop.gd" id="1_prcom"]
 [ext_resource type="Texture2D" uid="uid://bm2hd7buvtals" path="res://assets/ui/play-button.svg" id="1_ybp7h"]
+[ext_resource type="AudioStream" uid="uid://bfvk53nhkrjt3" path="res://assets/audio/shop.wav" id="3_qr63f"]
+[ext_resource type="AudioStream" uid="uid://b7x4cfnu5fks3" path="res://assets/audio/buy.ogg" id="4_018p6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ii85x"]
 font_size = 50
@@ -15,6 +17,10 @@ bg_color = Color(0.16038, 0.526292, 0.300575, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7h3h"]
 bg_color = Color(0.228475, 0.754199, 0.434323, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nqnua"]
+streams_count = 1
+stream_0/stream = ExtResource("4_018p6")
 
 [node name="ShopUI" type="CanvasLayer"]
 visible = false
@@ -141,5 +147,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r7h3h")
 icon = ExtResource("1_ybp7h")
 icon_alignment = 1
 expand_icon = true
+
+[node name="OpeningAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qr63f")
+
+[node name="BuyAudio" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_nqnua")
 
 [connection signal="pressed" from="Score/Continue" to="." method="_on_continue_pressed"]

@@ -11,6 +11,8 @@ signal done
 @onready var label1: Label = $Score/Button/Label
 @onready var label2: Label = $Score/Button2/Label
 @onready var label3: Label = $Score/Button3/Label
+@onready var opening_audio: AudioStreamPlayer = $OpeningAudio
+@onready var buy_audio: AudioStreamPlayer = $BuyAudio
 
 var buttonlist: Array[Button] = []
 var labellist: Array[Label] = []
@@ -37,6 +39,7 @@ func display() -> void:
 		i += 1
 		
 	visible = true
+	opening_audio.play()
 	
 func on_buy(machine: Machine, button: Button) -> void:
 	if InventorySingleton.coins < machine.cost :
@@ -46,6 +49,7 @@ func on_buy(machine: Machine, button: Button) -> void:
 	canvas_layer.set_coins(InventorySingleton.coins)
 	InventorySingleton.machines.push_front(machine)
 	canvas_layer.update_buttons()
+	buy_audio.play()
 	
 func _on_continue_pressed() -> void:
 	visible = false
