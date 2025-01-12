@@ -87,7 +87,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false
-			obj.cost = 3
+			obj.cost = 5
 		6:
 			obj.labelstr = "λ*-4"
 			obj.ops.push_back(Operator.new(
@@ -107,7 +107,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false
-			obj.cost = 3
+			obj.cost = 4
 		8:
 			obj.labelstr = "f(x) * $"
 			obj.ops.push_back(Operator.new(
@@ -118,6 +118,16 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.axis = Axis.Line
 			obj.func_up = true
 			obj.cost = 7
+		9:
+			obj.labelstr = "repeat last"
+			obj.ops.push_back(Operator.new(
+			"repeat last",
+			func(a): 
+				return a
+			))
+			obj.axis = Axis.Line
+			obj.func_up = true
+			obj.cost = 9
 		_:
 			printerr("Ne?", id)
 	
