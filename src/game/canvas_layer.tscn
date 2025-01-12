@@ -118,7 +118,7 @@ offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Stats/Panel"]
+[node name="Coins" type="Label" parent="Stats/Panel"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -159,7 +159,7 @@ offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Stats/Panel2"]
+[node name="Level" type="Label" parent="Stats/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,8 +296,7 @@ offset_top = 165.0
 offset_right = -9.0
 offset_bottom = 232.0
 grow_horizontal = 2
-text = "3
-"
+text = "5"
 label_settings = SubResource("LabelSettings_gor2e")
 vertical_alignment = 1
 

@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Placer
 @onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
+@onready var shop_ui: CanvasLayer = $"../ShopUI"
+@onready var tally: Node2D = $"../Tally"
 
 @export var tile_id: int = 8
 @export var active: bool = true
@@ -40,6 +42,14 @@ func reset() -> void:
 	map.get_or_add(place_index)
 	move()
 	
+func win() -> void:
+	reset()
+	remove_child(input_machine)
+	shop_ui.display()
+	await(shop_ui.done)
+	canvas_layer.input_enabled = true
+	tally.next_level()
+	add_child(input_machine)
 
 func _ready() -> void:
 	InventorySingleton.reset()

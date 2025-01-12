@@ -84,26 +84,51 @@ func on_start_selected():
 		await get_tree().create_timer(1).timeout
 		canvas_layer.set_score(result)
 	
-	placer.reset()
-	
+	if result >= round_goals[round - 1]:
+		InventorySingleton.coins += 2
+		InventorySingleton.coins += moves
+		canvas_layer.set_coins(InventorySingleton.coins)
+		placer.win()
+	else:
+		if moves <= 0:
+			placer.lose()
+		else:
+			placer.reset()
+			canvas_layer.input_enabled = true
+		
 	remove_child(sell_machine)
 	sell_machine.queue_free()
 	machinebuffer = []
 	canvas_layer.update_list(currentround,machinebuffer)
-	canvas_layer.input_enabled = true
+	
+func next_level():
+	round += 1
+	result = 0
+	moves = 5
+	canvas_layer.set_moves(moves)
+	canvas_layer.update_buttons()
+	canvas_layer.set_score(result)
+	canvas_layer.set_objective(round_goals[round - 1])
+	canvas_layer.update_list(currentround,machinebuffer)
 
-const round_nums = [[
-	1, 1, 1
-],
-[
-	2, 2, 2
-],
-[
-	3, 3, 3
-]]
+const round_nums = [
+[1, 1, 1],
+[1, 1, 1],
+[1, 1, 1],
+[2, 2, 2],
+[2, 2, 2],
+[2, 2, 2],
+[3, 3, 3],
+[3, 3, 3]
+]
 
 const round_goals = [
 	100,
 	200,
-	400
+	400,
+	600,
+	1000,
+	1500,
+	2500,
+	5000
 ]

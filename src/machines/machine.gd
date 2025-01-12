@@ -16,6 +16,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 @onready var hole_parent: Node2D = $HoleParent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var tooltip_panel: Panel = $TooltipPanel
+@onready var tally: Node2D = $Tally
 
 signal animation_finished
 
@@ -58,9 +59,54 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.ops.push_back(Operator.new(
 			"f(x) + 2",
 			func(a): 
-				return a
+				return a + 2
 			))
 			obj.axis = Axis.Left
+			obj.func_up = true
+		4:
+			obj.labelstr = "λ*2"
+			obj.ops.push_back(Operator.new(
+			"f(x) * 2",
+			func(a): 
+				return a * 2
+			))
+			obj.axis = Axis.Left
+			obj.func_up = true
+		5:
+			obj.labelstr = "-1"
+			obj.ops.push_back(Operator.new(
+			"x - 1",
+			func(a): 
+				return a - 1
+			))
+			obj.axis = Axis.Line
+			obj.func_up = false
+		6:
+			obj.labelstr = "λ*-4"
+			obj.ops.push_back(Operator.new(
+			"f(x) * -4",
+			func(a): 
+				return a * -4
+			))
+			obj.axis = Axis.Line
+			obj.func_up = false
+		7:
+			obj.labelstr = "a * #"
+			obj.ops.push_back(Operator.new(
+			"a * #unused_machines",
+			func(a): 
+				return a * InventorySingleton.machines.size()
+			))
+			obj.axis = Axis.Line
+			obj.func_up = false
+		8:
+			obj.labelstr = "f(x) * $"
+			obj.ops.push_back(Operator.new(
+			"f(x) * #coins",
+			func(a): 
+				return a * InventorySingleton.coins
+			))
+			obj.axis = Axis.Line
 			obj.func_up = true
 		_:
 			printerr("Ne?", id)

@@ -15,6 +15,8 @@ extends CanvasLayer
 @onready var score: Label = $Score/Score
 @onready var objective: Label = $Score/Objective
 
+@onready var coins: Label = $Stats/Panel/Coins
+@onready var level: Label = $Stats/Panel2/Level
 
 var slotlist : Array[Button] = []
 
@@ -97,3 +99,8 @@ func set_score(number: float):
 func set_objective(number: float):
 	objective.text = "Earn up to %s points to win" % str(number)
 	
+func set_level(number: int):
+	level.text = "Level: %s" % str(number)
+	
+func set_coins(number: int):
+	coins.text = str(number)
