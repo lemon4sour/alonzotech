@@ -13,6 +13,7 @@ func reset():
 		machines.push_back(Machine.construct(1, Placer.Direction.Left))
 	machines.push_back(Machine.construct(3, Placer.Direction.Left))
 	machines.push_back(Machine.construct(7, Placer.Direction.Left))
+	machines.push_back(Machine.construct(9, Placer.Direction.Left))
 	
 	startable = true
 	revertable = false

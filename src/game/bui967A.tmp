@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dt5irqr6e8x0b"]
+
+[ext_resource type="Script" path="res://src/game/placer.gd" id="2_3dlyc"]
+[ext_resource type="Script" path="res://src/game/tally.gd" id="2_go8xp"]
+[ext_resource type="PackedScene" uid="uid://d0mkxs4fd0qv4" path="res://src/game/canvas_layer.tscn" id="3_lfrqq"]
+[ext_resource type="PackedScene" uid="uid://cmkjpxemr011h" path="res://src/game/shop_ui.tscn" id="4_on15m"]
+[ext_resource type="Script" path="res://src/game/main.gd" id="5_kg12f"]
+[ext_resource type="Texture2D" uid="uid://bm2hd7buvtals" path="res://assets/ui/play-button.svg" id="6_n7ugy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyrfv"]
+bg_color = Color(0.247406, 0.831738, 0.478495, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqksd"]
+bg_color = Color(0.16038, 0.526292, 0.300575, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwuti"]
+bg_color = Color(0.228475, 0.754199, 0.434323, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e3j2d"]
+font_size = 50
+font_color = Color(1, 0.713726, 0.254902, 1)
+
+[node name="TileScene" type="Node2D"]
+
+[node name="Placer" type="Node2D" parent="."]
+script = ExtResource("2_3dlyc")
+
+[node name="Tally" type="Node2D" parent="."]
+script = ExtResource("2_go8xp")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-8, 1)
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_lfrqq")]
+
+[node name="ShopUI" parent="." instance=ExtResource("4_on15m")]
+
+[node name="Main" type="CanvasLayer" parent="."]
+script = ExtResource("5_kg12f")
+
+[node name="Play" type="Button" parent="Main"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 598.0
+offset_top = 443.0
+offset_right = -607.0
+offset_bottom = -341.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_wyrfv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xqksd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jwuti")
+icon = ExtResource("6_n7ugy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="Main"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -284.0
+offset_top = 366.0
+offset_right = 280.0
+offset_bottom = 503.0
+grow_horizontal = 2
+text = "AlonzoTech"
+label_settings = SubResource("LabelSettings_e3j2d")
+horizontal_alignment = 1
+
+[connection signal="machine_selected" from="CanvasLayer" to="Placer" method="on_machine_selected"]
+[connection signal="remove_machine" from="CanvasLayer" to="Tally" method="on_machine_extract"]
+[connection signal="revert" from="CanvasLayer" to="Placer" method="on_revert_selected"]
+[connection signal="run" from="CanvasLayer" to="Tally" method="on_start_selected"]
+[connection signal="send_machine" from="CanvasLayer" to="Tally" method="on_machine_insert"]
+[connection signal="pressed" from="Main/Play" to="Main" method="_on_play_pressed"]

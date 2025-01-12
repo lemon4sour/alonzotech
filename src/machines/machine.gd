@@ -19,7 +19,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 @onready var tally: Node2D = $Tally
 
 signal animation_finished
-
+signal set_counter
 
 static func construct(id: int, dir: Placer.Direction) -> Machine:
 	var obj = self_scene.instantiate()
@@ -119,11 +119,11 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.func_up = true
 			obj.cost = 7
 		9:
-			obj.labelstr = "repeat last"
+			obj.labelstr = "repeat"
 			obj.ops.push_back(Operator.new(
-			"repeat last",
+			"repeat previous",
 			func(a): 
-				return a
+				return "repeat"
 			))
 			obj.axis = Axis.Line
 			obj.func_up = true
@@ -159,15 +159,24 @@ func _process(delta: float) -> void:
 		Placer.Direction.Right:
 			hole_parent.rotation = deg_to_rad(90)
 
-func execute(a: int) -> int:
-	for op in ops:
-		a = op.op.call(a)
-	
+func execute_operations(a: int) -> int:
+	for i in range(ops.size()):
+		var op = ops[i]
+		var next = op.op.call(a)
+		
+		var repeat_index = i
+		while (next is String and next == "repeat"):
+			next = ops[repeat_index-1].op.call(a)
+			repeat_index -= 1
+		a = next
+		bounce()
+		emit_signal("set_counter",a)
+		await(animation_finished)
 	return a
 
-func upgrade(m: Machine):
-	m.ops.append_array(ops)
-	m.upgraded = true
+func upgrade(machine_to_upgrade: Machine):
+	machine_to_upgrade.ops.append_array(ops)
+	machine_to_upgrade.upgraded = true
 	update_tooltip()
 	
 func update_tooltip():

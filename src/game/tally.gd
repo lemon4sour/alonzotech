@@ -67,17 +67,26 @@ func on_start_selected():
 		
 		total = currentround[i]
 		for m: Machine in machines:
-			m.bounce()
-			await(m.animation_finished)
-			total = m.execute(total)
-			canvas_layer.set_counter(total)
-		result += total
+			if m.func_up:
+				continue
+			
+			m.set_counter.connect(on_counter_update)
+			total = await m.execute_operations(total)
+			m.set_counter.disconnect(on_counter_update)
+			
+			
+		
 		
 		sell_machine.bounce()
 		await(sell_machine.animation_finished)
 		
 		await get_tree().create_timer(1).timeout
+		
+		canvas_layer.score_insert(total)
+		result += total
+		await(canvas_layer.insert_finished)
 		canvas_layer.set_score(result)
+		await get_tree().create_timer(.5).timeout
 	
 	if result >= round_goals[round - 1]:
 		InventorySingleton.coins += 2
@@ -107,6 +116,9 @@ func next_level():
 	canvas_layer.set_level(round)
 	canvas_layer.set_objective(round_goals[round - 1])
 	canvas_layer.update_list(currentround,machinebuffer)
+
+func on_counter_update(value: float):
+	canvas_layer.set_counter(value)
 
 const round_nums = [
 [1, 1, 1],

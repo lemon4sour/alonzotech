@@ -46,7 +46,11 @@ func win() -> void:
 	reset()
 	remove_child(input_machine)
 	shop_ui.display()
+	InventorySingleton.startable = false
+	canvas_layer.update_buttons()
 	await(shop_ui.done)
+	InventorySingleton.startable = true
+	
 	canvas_layer.input_enabled = true
 	tally.next_level()
 	add_child(input_machine)

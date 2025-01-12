@@ -18,6 +18,8 @@ extends CanvasLayer
 @onready var coins: Label = $Stats/Panel/Coins
 @onready var level: Label = $Stats/Panel2/Level
 
+var score_value : float = 0
+
 var slotlist : Array[Button] = []
 
 signal machine_selected
@@ -25,6 +27,7 @@ signal revert
 signal run
 signal send_machine
 signal remove_machine
+signal insert_finished
 
 func _ready() -> void:
 	slotlist = [slot_1, slot_2, slot_3]
@@ -93,8 +96,21 @@ func set_counter(number: int):
 	gained.text = "+%s" % str(number)
 	
 func set_score(number: float):
-	score.text = str(number)
 	reset_counter()
+	score_value = number
+	score.text = str(number)
+	
+func score_insert(number: float):
+	var step_size: int = number / 50
+	if step_size < 1:
+		step_size = 1
+	for i in range(number,0,-step_size):
+		set_counter(i)
+		score_value += 1
+		score.text = str(score_value)
+		await get_tree().create_timer(.01).timeout
+	emit_signal("insert_finished")
+		
 	
 func set_objective(number: float):
 	objective.text = "Earn up to %s points to win" % str(number)
