@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0mkxs4fd0qv4"]
+[gd_scene load_steps=19 format=3 uid="uid://d0mkxs4fd0qv4"]
 
 [ext_resource type="Script" path="res://src/game/canvas_layer.gd" id="1_tq8v7"]
 [ext_resource type="Script" path="res://src/game/inventory.gd" id="2_nhsal"]
 [ext_resource type="Texture2D" uid="uid://y5co6k2wcbtt" path="res://assets/ui/two-coins.svg" id="3_osym3"]
 [ext_resource type="Texture2D" uid="uid://bm2hd7buvtals" path="res://assets/ui/play-button.svg" id="4_qhhaf"]
 [ext_resource type="PackedScene" uid="uid://cb5y33hc3d0o2" path="res://src/game/button.tscn" id="5_hhnbq"]
+[ext_resource type="AudioStream" uid="uid://dm5h3r6glvate" path="res://assets/audio/start.wav" id="6_yed1h"]
 
 [sub_resource type="FontFile" id="FontFile_7nolc"]
 subpixel_positioning = 0
@@ -68,6 +69,10 @@ font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_4j708"]
 font_size = 30
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s14lj"]
+streams_count = 1
+stream_0/stream = ExtResource("6_yed1h")
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_tq8v7")
@@ -336,6 +341,9 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
 [node name="Item" parent="." instance=ExtResource("5_hhnbq")]
+
+[node name="RunAudio" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_s14lj")
 
 [connection signal="machine_selected" from="Inventory/Scroll/HBoxContainer" to="." method="on_machine_selected"]
 [connection signal="send_machine" from="Inventory/Scroll/HBoxContainer" to="." method="on_send_machine"]

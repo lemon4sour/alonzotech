@@ -14,6 +14,8 @@ var startable: bool = true
 
 @export var input_machine: Node2D
 @onready var main: CanvasLayer = $"../Main"
+@onready var revert_audio: AudioStreamPlayer = $RevertAudio
+@onready var place_audio: AudioStreamPlayer = $PlaceAudio
 
 enum Direction {
 	Up,
@@ -145,6 +147,7 @@ func on_machine_selected(index: int) -> void:
 	InventorySingleton.startable = !map.has(place_index)
 	InventorySingleton.revertable = true
 	canvas_layer.update_buttons()
+	place_audio.play()
 	
 
 func on_revert_selected() -> void:
@@ -179,3 +182,5 @@ func on_revert_selected() -> void:
 	InventorySingleton.startable = true
 	InventorySingleton.revertable = !MachineQueue.is_empty()
 	canvas_layer.update_buttons()
+	revert_audio.play()
+	
