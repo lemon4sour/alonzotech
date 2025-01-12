@@ -20,6 +20,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 
 signal animation_finished
 signal set_counter
+signal disappear_over
 
 static func construct(id: int, dir: Placer.Direction) -> Machine:
 	var obj = self_scene.instantiate()
@@ -201,6 +202,13 @@ func bounce():
 	animation_player.play("wobble_bounce")
 	await(animation_player.animation_finished)
 	emit_signal("animation_finished")
+
+func appearanim():
+	animation_player.play("appear")
+
+func disappearanim():
+	animation_player.play("disappear")
+	emit_signal("disappear_over")
 
 enum Axis {
 	Line,

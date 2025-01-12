@@ -117,6 +117,7 @@ func on_machine_selected(index: int) -> void:
 	var machinescene = InventorySingleton.machines.pop_at(index)
 	machinescene.dir = direction
 	add_child(machinescene)
+	machinescene.appearanim()
 	machinescene.position = place_index
 	map.get_or_add(place_index)
 	
@@ -153,7 +154,12 @@ func on_machine_selected(index: int) -> void:
 func on_revert_selected() -> void:
 	var machine = MachineQueue.pop_back()
 	InventorySingleton.machines.push_back(machine)
+	var dupe : Machine = machine.duplicate()
+	add_child(dupe)
+	dupe.disappearanim()
+	dupe.disappear_over.connect(queue_free.bind(dupe))
 	remove_child(machine)
+	
 	move_back()
 	map.erase(place_index)
 	
