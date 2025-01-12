@@ -261,6 +261,18 @@ grow_horizontal = 2
 text = "Total Score:"
 vertical_alignment = 1
 
+[node name="Text2" type="Label" parent="Score"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 176.0
+offset_right = -144.0
+offset_bottom = 221.0
+grow_horizontal = 2
+text = "Moves:"
+vertical_alignment = 1
+
 [node name="Score" type="Label" parent="Score"]
 layout_mode = 1
 anchors_preset = 10
@@ -271,6 +283,20 @@ offset_right = -9.0
 offset_bottom = 119.0
 grow_horizontal = 2
 text = "0
+"
+label_settings = SubResource("LabelSettings_gor2e")
+vertical_alignment = 1
+
+[node name="Moves" type="Label" parent="Score"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 116.0
+offset_top = 165.0
+offset_right = -9.0
+offset_bottom = 232.0
+grow_horizontal = 2
+text = "3
 "
 label_settings = SubResource("LabelSettings_gor2e")
 vertical_alignment = 1

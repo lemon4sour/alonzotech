@@ -10,6 +10,12 @@ extends CanvasLayer
 
 @export var input_enabled: bool = true
 
+@onready var moves: Label = $Score/Moves
+@onready var gained: Label = $Score/Gained
+@onready var score: Label = $Score/Score
+@onready var objective: Label = $Score/Objective
+
+
 var slotlist : Array[Button] = []
 
 signal machine_selected
@@ -74,3 +80,20 @@ func clear_slot(index: int):
 		button.pressed.disconnect(on_click)
 	button.text = ""
 	#make animation here later
+	
+func set_moves(count: int):
+	moves.text = str(count)
+	
+func reset_counter():
+	gained.text = ""
+	
+func set_counter(number: int):
+	gained.text = "+%s" % str(number)
+	
+func set_score(number: float):
+	score.text = str(number)
+	reset_counter()
+	
+func set_objective(number: float):
+	objective.text = "Earn up to %s points to win" % str(number)
+	

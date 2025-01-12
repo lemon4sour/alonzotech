@@ -5,6 +5,8 @@ var round: int = 1
 var currentround = round_nums[round - 1]
 var machinebuffer: Array[Machine] = []
 
+var moves: int = 5
+
 var sell_machine: Node2D
 
 @onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
@@ -12,6 +14,7 @@ var sell_machine: Node2D
 
 func _ready() -> void:
 	await(canvas_layer.ready)
+	canvas_layer.set_objective(round_goals[round - 1])
 	canvas_layer.update_list(currentround,machinebuffer)
 
 func on_machine_insert(index: int):
@@ -31,7 +34,12 @@ func on_machine_extract(index: int):
 
 func on_start_selected():
 	canvas_layer.input_enabled = false
-	result = 0
+	moves -= 1
+	canvas_layer.set_moves(moves)
+	
+	InventorySingleton.startable = false
+	InventorySingleton.revertable = false
+	canvas_layer.update_buttons()
 	
 	var slot_index = 0;
 	
@@ -50,7 +58,7 @@ func on_start_selected():
 			await(m.animation_finished)
 			if (m.func_up):
 				m.upgrade(machine)
-		InventorySingleton.machines.push_back(machine)
+		InventorySingleton.machines.push_front(machine)
 		
 		sell_machine.bounce()
 		await(sell_machine.animation_finished)
@@ -58,6 +66,7 @@ func on_start_selected():
 			
 	var total = 0
 	for i in range(machinebuffer.size(),3):
+		canvas_layer.reset_counter()
 		canvas_layer.clear_slot(slot_index)
 		slot_index += 1
 		
@@ -66,11 +75,21 @@ func on_start_selected():
 			m.bounce()
 			await(m.animation_finished)
 			total = m.execute(total)
+			canvas_layer.set_counter(total)
 		result += total
 		
 		sell_machine.bounce()
 		await(sell_machine.animation_finished)
 		
+		await get_tree().create_timer(1).timeout
+		canvas_layer.set_score(result)
+	
+	placer.reset()
+	
+	remove_child(sell_machine)
+	sell_machine.queue_free()
+	machinebuffer = []
+	canvas_layer.update_list(currentround,machinebuffer)
 	canvas_layer.input_enabled = true
 
 const round_nums = [[
@@ -84,7 +103,7 @@ const round_nums = [[
 ]]
 
 const round_goals = [
-	15,
-	30,
-	45
+	100,
+	200,
+	400
 ]

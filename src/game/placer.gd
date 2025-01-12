@@ -23,6 +23,24 @@ var initial: Vector2i = Vector2i(0, 0)
 @export var place_index: Vector2i = Vector2i(32, 0)
 var direction: Direction = Direction.Right
 
+func reset() -> void:
+	map = {}
+	InventorySingleton.startable = true
+	while MachineQueue.size() > 0:
+		var machine = MachineQueue.pop_back()
+		InventorySingleton.machines.push_back(machine)
+		remove_child(machine)
+		move_back()
+		map.erase(place_index)
+	canvas_layer.update_buttons()
+	
+	place_index = Vector2i(32, 0)
+	initial = Vector2i(0, 0)
+	direction = Direction.Right
+	map.get_or_add(place_index)
+	move()
+	
+
 func _ready() -> void:
 	InventorySingleton.reset()
 	
