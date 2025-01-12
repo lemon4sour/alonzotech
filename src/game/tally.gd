@@ -11,6 +11,7 @@ var sell_machine: Node2D
 
 @onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
 @onready var placer: Placer = $"../Placer"
+@onready var run_audio: AudioStreamPlayer = $RunAudio
 
 func on_machine_insert(index: int):
 	var machine = InventorySingleton.machines[index]
@@ -39,8 +40,10 @@ func on_start_selected():
 	var slot_index = 0;
 	
 	sell_machine = preload("res://src/machines/sell_machine.tscn").instantiate()
+	run_audio.play()
 	add_child(sell_machine)
 	sell_machine.position = placer.place_index
+	await run_audio.finished
 	
 	var machines = placer.MachineQueue
 	
@@ -86,6 +89,7 @@ func on_start_selected():
 		result += total
 		await(canvas_layer.insert_finished)
 		canvas_layer.set_score(result)
+		print("x")
 		await get_tree().create_timer(.5).timeout
 	
 	if result >= round_goals[round - 1]:

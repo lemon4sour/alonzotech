@@ -100,6 +100,10 @@ func set_score(number: float):
 	score.text = str(number)
 	
 func score_insert(number: float):
+	if number == 0.0:
+		await get_tree().create_timer(.1).timeout
+		emit_signal("insert_finished")
+		return
 	var step_size: int = number / 50
 	if step_size < 1:
 		step_size = 1
