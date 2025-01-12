@@ -121,6 +121,9 @@ func next_level():
 	canvas_layer.set_level(round)
 	canvas_layer.set_objective(round_goals[round - 1])
 	canvas_layer.update_list(currentround,machinebuffer)
+	
+	if round_goals.size() < round:
+		get_tree().change_scene_to_file("res://src/odetojoy.tscn") 
 
 func on_counter_update(value: float):
 	canvas_layer.set_counter(value)
