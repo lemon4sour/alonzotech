@@ -7,12 +7,20 @@ signal done
 @onready var button: Button = $Score/Button
 @onready var button_2: Button = $Score/Button2
 @onready var button_3: Button = $Score/Button3
+
+@onready var label1: Label = $Score/Button/Label
+@onready var label2: Label = $Score/Button2/Label
+@onready var label3: Label = $Score/Button3/Label
+
 var buttonlist: Array[Button] = []
+var labellist: Array[Label] = []
 
 func _ready() -> void:
 	buttonlist = [button, button_2, button_3]
+	labellist = [label1, label2, label3]
 
 func display() -> void:
+	var i = 0
 	for button: Button in buttonlist:
 		var machine = Machine.construct(randi() % 10, Placer.Direction.Up)
 		button.text = machine.labelstr
@@ -24,7 +32,9 @@ func display() -> void:
 		else:
 			button.modulate = Color.WHITE
 		
+		labellist[i].text = "%s$" % str(machine.cost)
 		button.disabled = false
+		i += 1
 		
 	visible = true
 	

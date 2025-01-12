@@ -95,6 +95,7 @@ func on_start_selected():
 		placer.win()
 	else:
 		if moves <= 0:
+			round = 0
 			placer.lose()
 		else:
 			placer.reset()

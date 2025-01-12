@@ -84,7 +84,6 @@ func clear_slot(index: int):
 	if (button.pressed.is_connected(on_click)):
 		button.pressed.disconnect(on_click)
 	button.text = ""
-	#make animation here later
 	
 func set_moves(count: int):
 	moves.text = str(count)

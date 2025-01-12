@@ -13,6 +13,7 @@ var map: Dictionary = {}
 var startable: bool = true
 
 @export var input_machine: Node2D
+@onready var main: CanvasLayer = $"../Main"
 
 enum Direction {
 	Up,
@@ -55,9 +56,24 @@ func win() -> void:
 	tally.next_level()
 	add_child(input_machine)
 	
+func lose() -> void:
+	reset()
+	remove_child(input_machine)
+	InventorySingleton.revertable = false
+	InventorySingleton.startable = false
+	
+	InventorySingleton.machines.clear()
+	canvas_layer.update_buttons()
+	canvas_layer.clear_slot(0)
+	canvas_layer.clear_slot(1)
+	canvas_layer.clear_slot(2)
+	canvas_layer.update_list()
+	main.visible = true
+	
 func start():
 	InventorySingleton.reset()
 	
+	active = true
 	input_machine = preload("res://src/machines/input_machine.tscn").instantiate()
 	add_child(input_machine)
 	input_machine.position = place_index
