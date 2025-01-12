@@ -1,9 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://c46idvq2w8lo8"]
+[gd_scene load_steps=22 format=3 uid="uid://c46idvq2w8lo8"]
 
 [ext_resource type="Script" path="res://src/machines/machine.gd" id="1_tkk3n"]
 [ext_resource type="Texture2D" uid="uid://d11qdi8g8vtnx" path="res://assets/machines/standard.png" id="1_ui5ga"]
 [ext_resource type="FontFile" uid="uid://bq7egmcfnr18e" path="res://assets/AtlantisInternational-jen0.ttf" id="3_55pgs"]
 [ext_resource type="Texture2D" uid="uid://dxtnissfok33m" path="res://assets/machines/hole.png" id="3_p6rn0"]
+[ext_resource type="AudioStream" uid="uid://bpsa6kgbqyc7q" path="res://assets/audio/calc1.ogg" id="5_06nan"]
+[ext_resource type="AudioStream" uid="uid://d0ro2i5crcw8a" path="res://assets/audio/calc2.ogg" id="6_0lgbq"]
+[ext_resource type="AudioStream" uid="uid://bts6pea42j8c8" path="res://assets/audio/calc11.ogg" id="7_w253s"]
+[ext_resource type="AudioStream" uid="uid://banblqw5tdpue" path="res://assets/audio/calc12.ogg" id="8_2ygyj"]
+[ext_resource type="AudioStream" uid="uid://ogbnoqr5niqi" path="res://assets/audio/calc13.ogg" id="9_0nyk3"]
+[ext_resource type="AudioStream" uid="uid://b8ahj6d1775hy" path="res://assets/audio/calc3.ogg" id="10_tvqy7"]
+[ext_resource type="AudioStream" uid="uid://dg2jdn6rx3mm3" path="res://assets/audio/calc4.ogg" id="11_80ju0"]
+[ext_resource type="AudioStream" uid="uid://cv5g0gyenaity" path="res://assets/audio/calc5.ogg" id="12_45qcu"]
+[ext_resource type="AudioStream" uid="uid://867n3h8qudiy" path="res://assets/audio/calc6.ogg" id="13_dvfvc"]
+[ext_resource type="AudioStream" uid="uid://cmgqxbvjws5lg" path="res://assets/audio/calc7.ogg" id="14_7mcus"]
+[ext_resource type="AudioStream" uid="uid://cbdc7gheoliwi" path="res://assets/audio/calc8.ogg" id="15_k83y7"]
+[ext_resource type="AudioStream" uid="uid://cds8kuuk6ttj0" path="res://assets/audio/calc9.ogg" id="16_wwrag"]
+[ext_resource type="AudioStream" uid="uid://cbp1v7hmxn5vk" path="res://assets/audio/calc10.ogg" id="17_3qkff"]
 
 [sub_resource type="Animation" id="Animation_xs5gq"]
 length = 0.001
@@ -66,6 +79,22 @@ _data = {
 "wobble_bounce": SubResource("Animation_gm5v4")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p27pm"]
+streams_count = 13
+stream_0/stream = ExtResource("5_06nan")
+stream_1/stream = ExtResource("6_0lgbq")
+stream_2/stream = ExtResource("10_tvqy7")
+stream_3/stream = ExtResource("11_80ju0")
+stream_4/stream = ExtResource("12_45qcu")
+stream_5/stream = ExtResource("13_dvfvc")
+stream_6/stream = ExtResource("14_7mcus")
+stream_7/stream = ExtResource("15_k83y7")
+stream_8/stream = ExtResource("16_wwrag")
+stream_9/stream = ExtResource("17_3qkff")
+stream_10/stream = ExtResource("7_w253s")
+stream_11/stream = ExtResource("8_2ygyj")
+stream_12/stream = ExtResource("9_0nyk3")
+
 [node name="Machine" type="Node2D"]
 script = ExtResource("1_tkk3n")
 
@@ -124,4 +153,8 @@ texture = ExtResource("3_p6rn0")
 libraries = {
 "": SubResource("AnimationLibrary_cn3b3")
 }
-speed_scale = 1.5
+speed_scale = 1.7
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_p27pm")
+volume_db = 3.0

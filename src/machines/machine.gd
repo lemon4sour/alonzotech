@@ -16,7 +16,7 @@ const self_scene = preload("res://src/machines/machine.tscn")
 @onready var hole: TextureRect = $HoleParent/Hole
 @onready var hole_parent: Node2D = $HoleParent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var tally: Node2D = $Tally
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 signal animation_finished
 signal set_counter
@@ -58,9 +58,9 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.func_up = false
 			obj.cost = 2
 		3:
-			obj.labelstr = "λ+2"
+			obj.labelstr = "λ + 2"
 			obj.ops.push_back(Operator.new(
-			"f(x) + 2",
+			"λ + 2",
 			func(a): 
 				return a + 2
 			))
@@ -68,9 +68,9 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.func_up = true
 			obj.cost = 5
 		4:
-			obj.labelstr = "λ*2"
+			obj.labelstr = "λ x 2"
 			obj.ops.push_back(Operator.new(
-			"f(x) * 2",
+			"λ x 2",
 			func(a): 
 				return a * 2
 			))
@@ -80,7 +80,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 		5:
 			obj.labelstr = "-1 (+$)"
 			obj.ops.push_back(Operator.new(
-			"x - 1 (+ 1 coin)",
+			"a - 1 (+ 1 coin)",
 			func(a): 
 				return a - 1
 				InventorySingleton.coins += 1
@@ -89,19 +89,19 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.func_up = false
 			obj.cost = 5
 		6:
-			obj.labelstr = "λ*-4"
+			obj.labelstr = "λ x -4"
 			obj.ops.push_back(Operator.new(
-			"f(x) * -4",
+			"λ x -4",
 			func(a): 
 				return a * -4
 			))
 			obj.axis = Axis.Line
-			obj.func_up = false
+			obj.func_up = true
 			obj.cost = 4
 		7:
-			obj.labelstr = "a * #"
+			obj.labelstr = "a x #"
 			obj.ops.push_back(Operator.new(
-			"a * #unused_machines",
+			"x * #unused_machines",
 			func(a): 
 				return a * InventorySingleton.machines.size()
 			))
@@ -109,9 +109,9 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			obj.func_up = false
 			obj.cost = 4
 		8:
-			obj.labelstr = "f(x) * $"
+			obj.labelstr = "λ * $"
 			obj.ops.push_back(Operator.new(
-			"f(x) * #coins",
+			"λ * #coins",
 			func(a): 
 				return a * InventorySingleton.coins
 			))
@@ -171,6 +171,7 @@ func execute_operations(a: int) -> int:
 		a = next
 		bounce()
 		emit_signal("set_counter",a)
+		audio_stream_player.play()
 		await(animation_finished)
 	return a
 

@@ -1,7 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsnokkymsilyd"]
+[gd_scene load_steps=8 format=3 uid="uid://bsnokkymsilyd"]
 
 [ext_resource type="Script" path="res://src/machines/sell_machine.gd" id="1_h1q8c"]
 [ext_resource type="Texture2D" uid="uid://bg20thh5krxo" path="res://assets/machines/sell.png" id="1_li65q"]
+[ext_resource type="AudioStream" uid="uid://smnsaf4mdp1o" path="res://assets/audio/output.ogg" id="3_haty5"]
+
+[sub_resource type="Animation" id="Animation_xs5gq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_gm5v4"]
 resource_name = "wobble_bounce"
@@ -31,38 +59,16 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_xs5gq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cn3b3"]
 _data = {
 "RESET": SubResource("Animation_xs5gq"),
 "wobble_bounce": SubResource("Animation_gm5v4")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0fy0u"]
+playback_mode = 2
+streams_count = 1
+stream_0/stream = ExtResource("3_haty5")
 
 [node name="SellMachine" type="Node2D"]
 script = ExtResource("1_h1q8c")
@@ -75,3 +81,7 @@ libraries = {
 "": SubResource("AnimationLibrary_cn3b3")
 }
 speed_scale = 1.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_0fy0u")
+volume_db = -4.0
