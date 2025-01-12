@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://ipjfoixm7gj3"]
+
+[ext_resource type="AudioStream" uid="uid://c4k7ykw1ihov5" path="res://assets/audio/odetojoy.ogg" id="1_v70s8"]
+
+[sub_resource type="Gradient" id="Gradient_gkwl6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yjlba"]
+gradient = SubResource("Gradient_gkwl6")
+
+[node name="Odetojoy" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -787.5
+offset_top = -460.5
+offset_right = 787.5
+offset_bottom = 460.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = SubResource("GradientTexture1D_yjlba")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "THANKS FOR PLAYING"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_v70s8")
+volume_db = -10.0
+autoplay = true
