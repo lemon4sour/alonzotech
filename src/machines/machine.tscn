@@ -69,31 +69,29 @@ _data = {
 [node name="Machine" type="Node2D"]
 script = ExtResource("1_tkk3n")
 
-[node name="TooltipPanel" type="Panel" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
-mouse_filter = 1
-
-[node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_ui5ga")
-region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Label" type="Label" parent="Background"]
 z_index = 1
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -25.0001
-offset_right = 6.00004
-offset_bottom = -2.00008
+offset_left = -18.0
+offset_top = -9.0001
+offset_right = 22.0
+offset_bottom = 13.9999
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_55pgs")
 theme_override_font_sizes/font_size = 16
@@ -103,14 +101,24 @@ horizontal_alignment = 1
 [node name="HoleParent" type="Node2D" parent="."]
 rotation = -6.28319
 
-[node name="Hole" type="Sprite2D" parent="HoleParent"]
+[node name="Hole" type="TextureRect" parent="HoleParent"]
+offset_left = -15.9999
+offset_top = -16.0001
+offset_right = 16.0001
+offset_bottom = 15.9999
+pivot_offset = Vector2(15.9999, 16.0001)
+mouse_filter = 0
 texture = ExtResource("3_p6rn0")
-region_rect = Rect2(32, 0, 32, 32)
 
-[node name="Hole2" type="Sprite2D" parent="HoleParent"]
+[node name="Hole2" type="TextureRect" parent="HoleParent"]
+offset_left = -15.9999
+offset_top = -16.0001
+offset_right = 16.0001
+offset_bottom = 15.9999
 rotation = 3.14159
+pivot_offset = Vector2(15.9803, 16.0025)
+mouse_filter = 0
 texture = ExtResource("3_p6rn0")
-region_rect = Rect2(32, 0, 32, 32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

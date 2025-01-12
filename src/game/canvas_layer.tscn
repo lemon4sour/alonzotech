@@ -196,9 +196,11 @@ offset_right = -15.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-1074, -557)
 theme_override_styles/hover = SubResource("StyleBoxFlat_wf8ix")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_n4yvt")
 theme_override_styles/normal = SubResource("StyleBoxFlat_iglr6")
+disabled = true
 icon = ExtResource("4_qhhaf")
 icon_alignment = 1
 expand_icon = true
@@ -245,7 +247,7 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 55.0
 grow_horizontal = 2
-text = "Earn up to $ points to win"
+pivot_offset = Vector2(-180, 256)
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -282,8 +284,6 @@ offset_top = 52.0
 offset_right = -9.0
 offset_bottom = 119.0
 grow_horizontal = 2
-text = "0
-"
 label_settings = SubResource("LabelSettings_gor2e")
 vertical_alignment = 1
 
@@ -296,7 +296,6 @@ offset_top = 165.0
 offset_right = -9.0
 offset_bottom = 232.0
 grow_horizontal = 2
-text = "5"
 label_settings = SubResource("LabelSettings_gor2e")
 vertical_alignment = 1
 

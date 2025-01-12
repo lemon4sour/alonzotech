@@ -50,8 +50,8 @@ func win() -> void:
 	canvas_layer.input_enabled = true
 	tally.next_level()
 	add_child(input_machine)
-
-func _ready() -> void:
+	
+func start():
 	InventorySingleton.reset()
 	
 	input_machine = preload("res://src/machines/input_machine.tscn").instantiate()
@@ -59,6 +59,8 @@ func _ready() -> void:
 	input_machine.position = place_index
 	map.get_or_add(place_index)
 	move()
+	tally.next_level()
+	canvas_layer.update_buttons()
 
 func move():
 	match (direction):

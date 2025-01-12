@@ -4,7 +4,7 @@ extends HBoxContainer
 signal machine_selected
 signal send_machine
 
-func _ready() -> void:
+func update_buttons() -> void:
 	clear_buttons()
 	list_buttons()
 	

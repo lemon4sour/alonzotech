@@ -7,15 +7,15 @@ var axis: Axis
 var dir: Placer.Direction
 var func_up: bool
 var upgraded: bool = false
+var cost: int = 0
 
 const self_scene = preload("res://src/machines/machine.tscn")
 
-@onready var background: Sprite2D = $Background
+@onready var background: TextureRect = $Background
 @onready var label: Label = $Background/Label
-@onready var hole: Sprite2D = $HoleParent/Hole
+@onready var hole: TextureRect = $HoleParent/Hole
 @onready var hole_parent: Node2D = $HoleParent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var tooltip_panel: Panel = $TooltipPanel
 @onready var tally: Node2D = $Tally
 
 signal animation_finished
@@ -34,6 +34,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 				))
 			obj.axis = Axis.Line
 			obj.func_up = false
+			obj.cost = 2
 		1:
 			obj.labelstr = "x2"
 			obj.ops.push_back(Operator.new("a x 2",
@@ -42,6 +43,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 				))
 			obj.axis = Axis.Right
 			obj.func_up = false
+			obj.cost = 4
 		2:
 			obj.labelstr = "0->32"
 			obj.ops.push_back(Operator.new(
@@ -54,6 +56,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 				))
 			obj.axis = Axis.Left
 			obj.func_up = false
+			obj.cost = 2
 		3:
 			obj.labelstr = "λ+2"
 			obj.ops.push_back(Operator.new(
@@ -63,6 +66,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Left
 			obj.func_up = true
+			obj.cost = 5
 		4:
 			obj.labelstr = "λ*2"
 			obj.ops.push_back(Operator.new(
@@ -72,15 +76,18 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Left
 			obj.func_up = true
+			obj.cost = 7
 		5:
-			obj.labelstr = "-1"
+			obj.labelstr = "-1 (+$)"
 			obj.ops.push_back(Operator.new(
-			"x - 1",
+			"x - 1 (+ 1 coin)",
 			func(a): 
 				return a - 1
+				InventorySingleton.coins += 1
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false
+			obj.cost = 3
 		6:
 			obj.labelstr = "λ*-4"
 			obj.ops.push_back(Operator.new(
@@ -90,6 +97,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false
+			obj.cost = 4
 		7:
 			obj.labelstr = "a * #"
 			obj.ops.push_back(Operator.new(
@@ -99,6 +107,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Line
 			obj.func_up = false
+			obj.cost = 3
 		8:
 			obj.labelstr = "f(x) * $"
 			obj.ops.push_back(Operator.new(
@@ -108,6 +117,7 @@ static func construct(id: int, dir: Placer.Direction) -> Machine:
 			))
 			obj.axis = Axis.Line
 			obj.func_up = true
+			obj.cost = 7
 		_:
 			printerr("Ne?", id)
 	
@@ -151,7 +161,7 @@ func upgrade(m: Machine):
 	update_tooltip()
 	
 func update_tooltip():
-	tooltip_panel.tooltip_text = tooltip_gen()
+	background.tooltip_text = tooltip_gen()
 
 func tooltip_gen():
 	var res = "Operations:\n"

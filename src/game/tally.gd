@@ -1,7 +1,7 @@
 extends Node2D
 
 var result: int = 0
-var round: int = 1
+var round: int = 0
 var currentround = round_nums[round - 1]
 var machinebuffer: Array[Machine] = []
 
@@ -11,11 +11,6 @@ var sell_machine: Node2D
 
 @onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
 @onready var placer: Placer = $"../Placer"
-
-func _ready() -> void:
-	await(canvas_layer.ready)
-	canvas_layer.set_objective(round_goals[round - 1])
-	canvas_layer.update_list(currentround,machinebuffer)
 
 func on_machine_insert(index: int):
 	var machine = InventorySingleton.machines[index]
@@ -105,9 +100,11 @@ func next_level():
 	round += 1
 	result = 0
 	moves = 5
+	currentround = round_nums[round - 1]
 	canvas_layer.set_moves(moves)
 	canvas_layer.update_buttons()
 	canvas_layer.set_score(result)
+	canvas_layer.set_level(round)
 	canvas_layer.set_objective(round_goals[round - 1])
 	canvas_layer.update_list(currentround,machinebuffer)
 
